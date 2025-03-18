@@ -1,0 +1,15 @@
+h1{
+    margin-top: 15%;
+    font-family: "chupilca-fat", sans-serif;
+        font-weight: 900;
+        font-style: normal;
+        font-size: 150px;
+        color:green;
+}
+
+h3{
+    font-size:48px;
+    font-family: "ellograph-cf", monospace;
+        font-weight: 900;
+        font-style: italic;
+}

@@ -14,9 +14,20 @@ h3{
         font-style: italic;
 }
 .difficulty-btn{
+    display:inline-block;
 padding: 10px 24px;
+cursor: pointer;
+text-align: center;
+text-decoration:none;
+box-shadow: 0 9px #999;
 }
-
+.difficulty-btn:hover {
+    background-color: black;
+}
+.difficulty-btn:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
 .easy{
     background-color: rgb(154, 206, 154);
     color: rgb(3, 70, 3);

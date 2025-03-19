@@ -13,3 +13,24 @@ h3{
         font-weight: 900;
         font-style: italic;
 }
+.difficulty-btn{
+padding: 10px 24px;
+}
+
+.easy{
+    background-color: rgb(154, 206, 154);
+    color: rgb(3, 70, 3);
+    border: 2px;
+}
+
+.medium {
+    background-color: rgb(224, 233, 158);
+    color: rgb(182, 101, 9);
+    border: 2px;
+}
+
+.hard {
+    background-color: rgb(70, 10, 10);
+    color: rgb(155, 39, 29);
+    border: 2px;
+}

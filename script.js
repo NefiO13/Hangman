@@ -78,15 +78,31 @@ function updateUI() {
     document.getElementById('wordDisplay').textContent = displayedWord.split('').join('')
 }
 
-guessedLetter() {
+function guessLetter() {
     let inputField = document.getElementById('letterInput')
     let guessedLetter = inputField.value.toLowerCase()
 
     //check for valid input
-    if (guessedLetter.match(/^[a-z]$/)) {
+    if (!guessedLetter.match(/^[a-z]$/)) {
         alert('Please enter a valid letter(A-Z)!') //alerts user that the input was invalid
         inputField.value = ''
         return
     }
 
+    if (guessedLetters.includes(guessLetter)) {
+        alert(`You already guessed ${guessedLetter}'. Try a different letter!`)
+        inputField.value = ''
+        return
+    }
+
+    guessedLetters.push(guessedLetter)
+
+    if (selectedWord.includes(guessedLetter)) {
+        updateCorrectGuess(guessedLetter)
+    } else {
+        updateWrongGuess(guessedLetter)
+    }
+
+    inputField.value = ''
+    document.getElementById('letterInput').focus()
 }

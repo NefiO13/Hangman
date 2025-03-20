@@ -25,12 +25,12 @@ const maxMistakes = 6
 function startGame(level) {
     //reset game
     wrongGuesses = 0
-    guessedLetters = []
+    guessedLetter = []
 
     selectedWord = getRandomWord(level)
-
+    displayedWord = '_ '.repeat(selectedWord.length)
     updateDifficultyDisplay(level)
-
+    updateUI()
 
     //Show game area and display als o hide selection button
     document.getElementById('gameArea').classList.remove('d-none')
@@ -41,10 +41,7 @@ function startGame(level) {
 
     document.getElementById('difficultySelection').classList.add('d-none')
 
-
-
-
-
+    document.getElementById('letterInput').focus()
 }
 
 
@@ -74,5 +71,22 @@ function updateDifficultyDisplay(level) {
         difficultyBox.classList.add('hard')
     }
 
+
+}
+
+function updateUI() {
+    document.getElementById('wordDisplay').textContent = displayedWord.split('').join('')
+}
+
+guessedLetter() {
+    let inputField = document.getElementById('letterInput')
+    let guessedLetter = inputField.value.toLowerCase()
+
+    //check for valid input
+    if (guessedLetter.match(/^[a-z]$/)) {
+        alert('Please enter a valid letter(A-Z)!') //alerts user that the input was invalid
+        inputField.value = ''
+        return
+    }
 
 }

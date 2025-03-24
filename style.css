@@ -21,9 +21,7 @@ text-align: center;
 text-decoration:none;
 box-shadow: 0 9px #999;
 }
-.difficulty-btn:hover {
-    background-color: rgb(255, 255, 255);
-}
+
 .difficulty-btn:active{
     box-shadow: 0 5px #a5d49c;
     transform: translateY(4px);

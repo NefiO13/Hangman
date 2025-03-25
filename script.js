@@ -88,7 +88,7 @@ function guessLetter() {
 
 
     //Check if letter was already guessed
-    if (guessedLetters.includes(guessLetter)) {
+    if (guessedLetters.includes(guessedLetter)) {
         alert(`You already guessed '${guessedLetter}'. Try a different letter!`)
         inputField.value = '' // Clear input field
         return
@@ -138,4 +138,17 @@ function updateCorrectGuess(guessedLetter) {
         endGame(true)
     }
 
+}
+
+function endGame(won) {
+    if (won) {
+        setTimeout(() => alert(`You guessed The word! Congrats`), 100)
+        inputField.value = '' // Clear input field
+    } else {
+        setTimeout(() => alert(`You guessed wrong, the word is ${selectedWord}`), 100)
+    }
+}
+
+function restartGame() {
+    location.reload()
 }

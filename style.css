@@ -43,3 +43,7 @@ box-shadow: 0 9px #999;
     color: rgb(155, 39, 29);
     border: 2px;
 }
+
+#difficultySelection{
+    margin-top: auto;
+}

@@ -18,13 +18,13 @@ const wordList = [
 let selectedWord = ''
 let displayedWord = ''
 let wrongGuesses = 0
-let guessedLetters = []
+let guessedLetters = [];
 const maxMistakes = 6;
 const guessedWords = [];
 
-document.getElementById('letter-input').addEventListener('keypress', function (event) {
+document.getElementById('LetterInput').addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
-        guessLetter();
+        GuessLetter();
     }
 });
 
@@ -57,7 +57,7 @@ function getRandomWord(level) {
         if (level === 'easy') return word.length <= 4
         if (level === 'medium') return word.length >= 5 && word.length <= 7
         if (level === 'hard') return word.length >= 8
-    })
+    });
     return filteredWords[Math.floor(Math.random() * filteredWords.length)]
 }
 
@@ -116,11 +116,15 @@ function guessLetter() {
 
 }
 
-document
+
 function updateWrongGuess(guessedLetter) {
     wrongGuesses++
     document.getElementById('wrongLetters').textContent += `${guessedLetter}`
     //document.getElementById('shamrock').src = `imgs/shamrock${6-wrongGuesses}.jpg`
+    document.getElementById('shamrock').src = `im/images${6 - wrongGuesses}.jpeg`;
+    document.getElementById('wrongSound').play();
+
+
 
     if (wrongGuesses === maxMistakes) {
         endGame(false)
@@ -138,9 +142,9 @@ function updateCorrectGuess(guessedLetter) {
         }
     }
 
-    displayedWord = newDisplayedWord
-    updateUI()
-
+    displayedWord = newDisplayedWord;
+    updateUI();
+    document.getElementById('correctSound').play();
     //  Check if the player has guessed all letters
     if (!displayedWord.includes('_')) {
         endGame(true)
@@ -149,6 +153,7 @@ function updateCorrectGuess(guessedLetter) {
 }
 
 function endGame(won) {
+    let message = document.getElementById('gameMessage')
     if (won) {
         setTimeout(() => alert(`You guessed The word! Congrats`), 100)
         inputField.value = '' // Clear input field
@@ -160,11 +165,14 @@ function endGame(won) {
 }
 
 function updateWordGraveyard() {
-    let list = document.getElementById('guessed-word-list');
+    let list = document.getElementById('guessedWordList');
     list.innerHTML = guessedWords.map(word => `<li class="list-group-item">${word}</li>`).join('');
 }
 
 function restartGame() {
-    document.getElementById('game-message').innerHTML = '';
-    startGame('easy');
+    document.getElementById('gameArea').classList.add('d-none');
+    document.getElementById('difficultySelection').classList.remove('d-none');
+    document.getElementById('gameMessage').innerHTML = '';
+    document.getElementById('wrongLetters').textContent = 'Wrong Guesses: ';
+    document.getElementById('shamrock').src = 'img/image6.jpeg';
 }

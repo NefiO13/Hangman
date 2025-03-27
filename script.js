@@ -19,7 +19,14 @@ let selectedWord = ''
 let displayedWord = ''
 let wrongGuesses = 0
 let guessedLetters = []
-const maxMistakes = 6
+const maxMistakes = 6;
+const guessedWords = [];
+
+document.getElementById('letter-input').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        guessLetter();
+    }
+});
 
 // Start Game Function (runs everything)
 function startGame(level) {
@@ -109,6 +116,7 @@ function guessLetter() {
 
 }
 
+document
 function updateWrongGuess(guessedLetter) {
     wrongGuesses++
     document.getElementById('wrongLetters').textContent += `${guessedLetter}`
@@ -147,8 +155,16 @@ function endGame(won) {
     } else {
         setTimeout(() => alert(`You guessed wrong, the word is ${selectedWord}`), 100)
     }
+    guessedWords.push(selectedWord);
+    updateWordGraveyard();
+}
+
+function updateWordGraveyard() {
+    let list = document.getElementById('guessed-word-list');
+    list.innerHTML = guessedWords.map(word => `<li class="list-group-item">${word}</li>`).join('');
 }
 
 function restartGame() {
-    location.reload()
+    document.getElementById('game-message').innerHTML = '';
+    startGame('easy');
 }

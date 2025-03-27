@@ -44,11 +44,24 @@
             <div class="mt-4">
                 <button id="restartBtn" class="btn btn-danger" onclick="restartGame()">Restart Game</button>
             </div>
-
         </div>
 
 
+        <div id="wordGraveyard" class="mt-4">
+            <h3>Guessed Words</h3>
+            <ul id="guessed-words-list" class="list-group"></ul>
+        </div>
+        </div>
+
+        <div id="game-message" class="mt-4"></div>
+
+
     </main>
+
+    <audio id="correctSound" src="sounds/correct.mp3"></audio>
+    <audio id="wrongSound" src="sounds/wrong.mp3"></audio>
+
+
     <footer>
         <!-- place footer here -->
     </footer>

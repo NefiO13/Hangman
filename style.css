@@ -44,6 +44,13 @@ box-shadow: 0 9px #999;
     border: 2px;
 }
 
-#difficultySelection{
-    margin-top: auto;
+#wordGraveyard {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#game-message{
+    font-size: 24px;
+    font-weight:bold;
 }

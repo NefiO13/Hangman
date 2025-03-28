@@ -110,19 +110,19 @@ function guessLetter() {
     document.getElementById('letterInput').focus() // Refocus input field for next guess
 
 }
-
-
 function updateWrongGuess(guessedLetter) {
-    wrongGuesses++
-    document.getElementById('wrongLetters').textContent += `${guessedLetter}`
-    //document.getElementById('shamrock').src = `imgs/shamrock${6-wrongGuesses}.jpg`
-    document.getElementById('shamrock').src = `imgs/images${4 - wrongGuesses}.jpg`;
-    document.getElementById('wrongSound').play();
+    wrongGuesses++;
+    document.getElementById('wrongLetters').textContent += guessedLetter;
+    document.getElementById('shamrock').src = `imgs/images${4 - wrongGuesses}.jpg`; // Use template literals for cleaner string interpolation
 
+    setTimeout(() => {
+        document.getElementById('loseSound').play();
+    }, 500); // Correct setTimeout syntax
 
+    console.log(wrongGuesses);
 
     if (wrongGuesses === maxMistakes) {
-        endGame(false)
+        endGame(false);
     }
 }
 

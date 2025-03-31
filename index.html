@@ -16,19 +16,20 @@
 
 <body>
 
-    <main class="container text-center">
+    <main class="container align-items-center text-center">
         <h1 class="mb-4">Shamrock Hangman</h1>
 
-        <div id="difficultySelection"><!--Remove THIS-->
+        <div id="difficultySelection">
             <h3>Select Difficulty</h3>
             <button class="btn btn-success difficulty-btn" onclick="startGame('easy')"> Easy</button>
             <button class="btn btn-warning difficulty-btn" onclick="startGame('medium')"> Medium</button>
             <button class="btn btn-danger difficulty-btn" onclick="startGame('hard')"> Hard</button>
         </div>
 
-        <div id="difficultyBox" class="mt-3 p-3 fw-bold d-none"></div> <!--ADD D-NONE-->
+        <div id="difficultyBox" class="mt-3 p-3 fw-bold d-none"></div>
 
-        <div id="gameArea" class="mt-4 d-none d-none"><!--ADD D-NONE-->
+        <div id="gameArea" class="mt-4 d-none">
+            <p id="scoreboard"></p>
             <h2 id="wordDisplay" class="mb-3">_ _ _ _ _</h2>
 
             <div class="mb-3">
@@ -46,17 +47,9 @@
             </div>
         </div>
 
-
-        <div id="WordGraveyard" class="mt-4">
-            <h3>Guessed Words</h3>
-            <ul id="guessedWordListSS" class="list-group"></ul>
-        </div>
-        </div>
-
         <div id="gameMessage" class="mt-4"></div>
-
-
     </main>
+
 
     <audio id="winSound" src="sounds/correct-293359.mp3"></audio>
     <audio id="loseSound" src="sounds/buzzer-or-wrong-answer-20582.mp3"></audio>

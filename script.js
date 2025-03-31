@@ -21,8 +21,20 @@ let wrongGuesses = 0
 let guessedLetters = [];
 const maxMistakes = 4;
 const guessedWords = [];
+let winAmount = 0
+let loseAmount = 0
+
+
+const scoreboard = document.getElementById('scoreboard');
+
+const updateScoreboard = () => {
+    scoreboard.innerHTML = `Wins: ${winAmount} | Loses: ${loseAmount}`;
+};
+
 const winSound = new Audio('sounds/correct-293359.mp3')
 const loseSound = new Audio('sounds/buzzer-or-wrong-answer-20582.mp3')
+
+
 // Start Game Function (runs everything)
 function startGame(level) {
     //reset game
@@ -41,6 +53,7 @@ function startGame(level) {
 
     document.getElementById('difficultyBox').classList.remove('d-none')
     document.getElementById('difficultyBox').classList.add('d-block')
+
 
     document.getElementById('difficultySelection').classList.add('d-none')
     //Auto-focus on input
@@ -115,9 +128,11 @@ function updateWrongGuess(guessedLetter) {
     document.getElementById('wrongLetters').textContent += guessedLetter;
     document.getElementById('shamrock').src = `imgs/images${4 - wrongGuesses}.jpg`; // Use template literals for cleaner string interpolation
 
+
+
     setTimeout(() => {
         document.getElementById('loseSound').play();
-    }, 500); // Correct setTimeout syntax
+    }, 50); // Correct setTimeout syntax
 
     console.log(wrongGuesses);
 
@@ -154,24 +169,17 @@ function endGame(won) {
         winSound.play()
         setTimeout(() => alert(`You guessed The word! Congrats`), 100)
         inputField.value = '' // Clear input field
+        winAmount++
+        updateScoreboard()
     } else {
         loseSound.play()
         setTimeout(() => alert(`You guessed wrong, the word is ${selectedWord}`), 100)
+        loseAmount++
+        updateScoreboard()
     }
 
 
-
-    guessedWords.push(selectedWord);
-    updateWordGraveyard();
-
 }
-
-function updateWordGraveyard() {
-    let list = document.getElementById('guessedWordList');
-    list.innerHTML = guessedWords.map(word => `<li class="list-group-item">${guessedWords}</li>`).join('');
-}
-
-
 
 document.getElementById('letterInput').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
@@ -192,5 +200,5 @@ function restartGame() {
     document.getElementById('gameArea').classList.add('d-none');
     document.getElementById('gameArea').classList.add('d-none');
     document.getElementById('difficultyBox').classList.add('d-none');
-
+    document.getElementById('shamrock').src = `imgs/images${4 - wrongGuesses}.jpg`;
 }

@@ -26,14 +26,19 @@ let loseAmount = 0
 
 
 const scoreboard = document.getElementById('scoreboard');
+const letterInput = document.getElementById('letterInput')
+const shamrockImage = document.getElementById('shamrock');
+const guessButton = document.getElementById('guessButton')
 
-const updateScoreboard = () => {
-    scoreboard.innerHTML = `Wins: ${winAmount} | Loses: ${loseAmount}`;
-};
+
 
 const winSound = new Audio('sounds/correct-293359.mp3')
 const loseSound = new Audio('sounds/buzzer-or-wrong-answer-20582.mp3')
 
+
+const updateScoreboard = () => {
+    scoreboard.innerHTML = `Wins: ${winAmount} | Loses: ${loseAmount}`;
+};
 
 // Start Game Function (runs everything)
 function startGame(level) {
@@ -46,6 +51,9 @@ function startGame(level) {
 
     updateDifficultyDisplay(level)
     updateUI()
+    updateScoreboard();
+
+    shamrockImage.src = `imgs/images6.jpg`
 
     //Show Game Area/Difficulty Display , hide selection buttons
     document.getElementById('gameArea').classList.remove('d-none')
@@ -57,6 +65,10 @@ function startGame(level) {
 
     document.getElementById('difficultySelection').classList.add('d-none')
     //Auto-focus on input
+
+    letterInput.disabled = false;
+    guessButton.disabled = false;
+
     document.getElementById('letterInput').focus()
 }
 
@@ -88,6 +100,7 @@ function updateDifficultyDisplay(level) {
 
 function updateUI() {
     document.getElementById('wordDisplay').textContent = displayedWord.split('').join('  ') // Show word progress with spaces
+    document.getElementById('wrongLetters').textContent = `Wrong Guesses: `;
 }
 
 function guessLetter() {
@@ -97,20 +110,20 @@ function guessLetter() {
     //Check if input is a valid letter (A-Z)
     if (!guessedLetter.match(/^[a-z]$/)) {
         alert('Please enter a valid letter (A-Z)!') // Alert user if invalid input
-        inputField.value = '' // Clear input field
-        return // Exit function
+        inputField.value = ''; // Clear input field
+        return; // Exit function
     }
 
 
     //Check if letter was already guessed
     if (guessedLetters.includes(guessedLetter)) {
         alert(`You already guessed '${guessedLetter}'. Try a different letter!`)
-        inputField.value = '' // Clear input field
-        return
+        inputField.value = ''; // Clear input field
+        return;
     }
 
     //Store guessed letter
-    guessedLetters.push(guessedLetter)
+    guessedLetters.push(guessedLetter);
 
     //Check if guessed letter is in the selected word
     if (selectedWord.includes(guessedLetter)) {
@@ -125,13 +138,13 @@ function guessLetter() {
 }
 function updateWrongGuess(guessedLetter) {
     wrongGuesses++;
-    document.getElementById('wrongLetters').textContent += guessedLetter;
-    document.getElementById('shamrock').src = `imgs/images${4 - wrongGuesses}.jpg`; // Use template literals for cleaner string interpolation
+    document.getElementById('wrongLetters').textContent += `${guessedLetter}`;
+    shamrockImage.src = `imgs/images${4 - wrongGuesses}.jpg`; // Use template literals for cleaner string interpolation
 
 
 
     setTimeout(() => {
-        document.getElementById('loseSound').play();
+        loseSound.play();
     }, 50); // Correct setTimeout syntax
 
     console.log(wrongGuesses);
@@ -167,17 +180,18 @@ function endGame(won) {
     if (won) {
 
         winSound.play()
-        setTimeout(() => alert(`You guessed The word! Congrats`), 100)
-        inputField.value = '' // Clear input field
+        setTimeout(() => alert(`You guessed The word! Congrats`), 50)
         winAmount++
-        updateScoreboard()
     } else {
         loseSound.play()
         setTimeout(() => alert(`You guessed wrong, the word is ${selectedWord}`), 100)
         loseAmount++
-        updateScoreboard()
     }
 
+    letterInput.disabled = true;
+    guessButton.disabled = true;
+
+    updateScoreboard();
 
 }
 
@@ -191,14 +205,27 @@ function restartGame() {
     wrongGuesses = 0
     selectedWord = ''
     displayedWord = ''
-    guessedLetters = ''
-    wrongLetters = ''
-    document.getElementById('wrongLetters').textContent = `Wrong Letters:`
+    guessedLetters = [];
+
+
+    document.getElementById('wrongLetters').textContent = `Wrong Guesses: `
     document.getElementById('letterInput').value = ''
+
     document.getElementById('difficultySelection').classList.remove('d-none')
     document.getElementById('difficultySelection').classList.remove('d-none')
     document.getElementById('gameArea').classList.add('d-none');
     document.getElementById('gameArea').classList.add('d-none');
     document.getElementById('difficultyBox').classList.add('d-none');
-    document.getElementById('shamrock').src = `imgs/images${4 - wrongGuesses}.jpg`;
+
+    shamrockImage.src = `imgs/images4.jpg`;
+
+    //stop sounds//
+    winSound.pause();
+    winSound.currentTime = 0;
+    loseSound.pause();
+    loseSound.currentTime = 0;
+
+    //enable buttons again//
+    letterInput.disabled = false;
+    guessButton.disabled = false;
 }
